@@ -1,0 +1,7 @@
+{% macro fit(menu) %}
+
+    {% for key,href in menu.items() %}   
+        <a href="{{ href }}" class="nav-link pr-0">{{ key }}</a>
+    {% endfor %}
+
+{% endmacro %}

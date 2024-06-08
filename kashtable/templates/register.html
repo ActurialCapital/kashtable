@@ -1,0 +1,312 @@
+{% extends "layouts/saas.html" %}
+{% import "macros/breadcrumbs.html" as breadcrumbs %}
+
+{% block aside %}{% include "partials/_aside.html" %}{% endblock aside %} 
+
+{% block header %}{% include "partials/_header.html" %}{% endblock header %} 
+		
+{% block breadcrumbs %} {{ breadcrumbs.fit(title="Create Account", crumbs={"Login": url_for("users.login")}) }} {% endblock breadcrumbs %} 
+			
+{% block content %}
+            
+    <!--begin::Card-->
+    <div class="card card-custom card-stretch example example-compact" id="kt_page_stretched_card">
+        <div class="card-header" kt-hidden-height="74" style="">
+            <div class="card-title">
+                <h3 class="card-label">Sign Up</h3>
+                </div>
+            <div class="card-toolbar">
+                	<span class="font-weight-bold text-muted font-size-h4">Already Have An Account?</span>
+                	<a href="{{ url_for('users.login') }}" class="font-weight-bold text-primary font-size-h4 ml-2" id="kt_login_signup">Login</a>
+
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="form" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="card-body">   
+
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.first_name.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.first_name.errors %}
+                            {{ form.first_name(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.first_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.first_name(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.last_name.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.last_name.errors %}
+                            {{ form.last_name(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.last_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.last_name(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.email.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->  
+                
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.phone_number.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.phone_number.errors %}
+                            {{ form.phone_number(class="form-control is-invalid", id="kt_inputmask_3") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.phone_number.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.phone_number(class="form-control", id="kt_inputmask_3") }}
+                            <span class="form-text text-muted">Phone number format: <code>(999) 999-9999</code></span>
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+                
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.bundle.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <div class="radio-inline">
+                            {% for subfield in form.bundle %}
+                                <label class="radio">
+                                    {{ subfield }}
+                                    <span></span>
+                                    {{ subfield.label }}
+                                </label>
+                        {% endfor %} 
+                        </div>
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->    
+                                
+                                                                
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.company_name.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.company_name.errors %}
+                            {{ form.company_name(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.company_name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.company_name(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+                
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.street.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.street.errors %}
+                            {{ form.street(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.street.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.street(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+                                
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.postcode.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.postcode.errors %}
+                            {{ form.postcode(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.postcode.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.postcode(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.city.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.city.errors %}
+                            {{ form.city(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.city.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.city(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.country.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.country.errors %}
+                            {{ form.country(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.country.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.country(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.siren.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.siren.errors %}
+                            {{ form.siren(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.siren.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.siren(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+                                                                                            
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.password.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->  
+                                              
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.confirm_password.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.confirm_password(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->   
+                                                                        
+            </div>
+            <!--end::Body-->
+            <div class="card-footer">
+                <div class="row">
+                    <!--end::Action-->
+                    <div class="col-lg-9 ml-lg-auto">
+                        {{ form.submit(class="btn btn-primary mr-2") }}
+                    </div>
+                    <!--end::Action-->
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+    <!--end::Card-->
+    
+{% endblock content %} 
+
+{% block footer %}{% include "partials/_footer.html" %}{% endblock footer %}
+
+{% block custom_js %}
+    <script src="{{ url_for('static', filename='assets/js/pages/my-script.js') }}"></script>
+{% endblock custom_js %} 

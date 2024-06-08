@@ -1,0 +1,121 @@
+{% from "settings.html" import header_menu, topbar_is_authenticated_menu, topbar_not_authenticated_menu %}
+
+<div id="kt_header" class="header header-fixed">
+    <!--begin::Container-->
+    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+        <!--begin::Header Menu Wrapper-->
+        <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+            <!--begin::Header Menu-->
+            <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
+
+                <!--begin::Header Nav-->
+                <ul class="menu-nav">
+
+                    {% if current_user.is_authenticated %}
+                    
+                        <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+                            <a href="{{ url_for('users.profile') }}" class="menu-link">
+                                <span class="menu-text">Welcome Back, {{ current_user.first_name }}.</span>
+                            </a>  
+                        </li>   
+          
+                        {% for label, route in header_menu.items() %}
+                                             
+                            <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="click" aria-haspopup="true">
+                                <a href="{{ route }}" class="menu-link">
+                                    <span class="menu-text">{{ label }}</span>
+                                </a>  
+                            </li>   
+                        
+                        {% endfor %}  
+                        
+                    {% endif %}
+                                                        
+                </ul>															
+                <!--end::Header Nav-->  
+                                                     
+            </div>
+            <!--end::Header Menu-->
+        </div>
+        <!--end::Header Menu Wrapper-->
+
+        <!--begin::Topbar (Right)-->
+        <div class="topbar header-menu header-menu-layout-default">
+            <!--begin::Header Nav-->
+            <div class="topbar-item">
+                
+                {% if current_user.is_authenticated %}
+                
+                    {% for label, route in topbar_is_authenticated_menu.items() %}
+                    
+                        {% if route is string %}
+                                           
+                            <a href="{{ route }}" class="btn btn-hover-transparent-primary font-weight-bold mr-2">
+                                {{ label }}
+                            </a>   
+                        
+                        {% else %}  
+
+                            <div class="dropdown mr-1">
+                              <!--begin::Toggle-->
+                              <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="false">
+                                <div class="btn btn-hover-transparent-primary font-weight-bold mr-2">
+                                    {{ label }}
+                                </div>
+                              </div>
+                              <!--end::Toggle-->
+                              <!--begin::Dropdown-->
+                              <div class="dropdown-menu p-0 m-0 dropdown-menu-right dropdown-menu-anim-up dropdown-menu-lg">
+                                <!--begin:Header-->
+                                <div class="d-flex flex-column flex-center py-10 rounded-top border-bottom">
+                                  <h4 class="text-primary font-weight-bold">{{ label }}</h4>
+                                </div>
+                                <!--end:Header-->    
+                                
+                                                                               
+                                <!--begin:Nav-->
+                                <div class="row row-paddingless">
+                                  <!--begin:Item-->    
+                                                                                                         
+                                {% for sublabel, subroute in route.items() %}
+
+                                      <div class="col-6">
+                                        <a href="{{ subroute }}" class="d-block py-10 px-5 text-center bg-hover-light border-right border-bottom">
+                                          <span class="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1">{{ sublabel }}</span>
+                                        </a>
+                                      </div>
+                            
+                                {% endfor %}
+                                   <!--end:Item-->
+                                </div>
+                                <!--end:Nav-->
+                              </div>                       
+                              <!--end::Dropdown-->
+                            </div>
+                     
+                        {% endif %}      
+                    
+                    {% endfor %}    
+                                                            
+                {% else %}
+
+                    {% for label, route in topbar_not_authenticated_menu.items() %}
+                                           
+                        <a href="{{ route }}" class="btn btn-hover-transparent-primary font-weight-bold mr-2">
+                            {{ label }}
+                        </a>              
+                    
+                    {% endfor %}    
+                                                       
+                {% endif %}                   
+                                          
+            </div>															
+            <!--end::Header Nav-->                          
+        </div>
+         <!--end::Topbar (Right)-->
+         
+    </div>
+    <!--end::Container-->
+</div>
+
+

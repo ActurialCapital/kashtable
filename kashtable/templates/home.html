@@ -1,0 +1,67 @@
+{% import "macros/breadcrumbs.html" as breadcrumbs %}
+
+{% from "settings.html" import aside_is_authenticated_menu, aside_icons %}
+
+{% extends "layouts/saas.html" %}
+
+{% block aside %}{% include "partials/_aside.html" %}{% endblock aside %} 
+
+{% block header %}{% include "partials/_header.html" %}{% endblock header %} 
+
+{% block breadcrumbs %}{{ breadcrumbs.fit(title="Home") }}{% endblock breadcrumbs %} 
+
+{% block content %}
+
+    {% set menu = aside_is_authenticated_menu %}
+
+    <div class="container">
+      <!--begin::Row-->
+      <div class="row">
+      
+        {% for section,_ in menu.items() %}
+            {% for subsection,_  in menu[section].items() %}  
+                <div class="col-lg-6 col-xl-4 mb-5">
+                  <!--begin::Iconbox-->
+                  <div class="card card-custom wave card-stretch mb-8 mb-lg-0" id="kt_page_stretched_card">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center p-5">
+                        <div class="mr-6">
+                          <i class="{{ aside_icons[subsection] }}"></i>
+                        </div>
+                        <div class="d-flex flex-column">
+                          <div class="text-dark font-weight-bold font-size-h4 mb-3">
+                              {{ subsection }}
+                          </div>
+                          {% for subsubsection,url in menu[section][subsection].items() %}
+                              <a href="{{ url }}" class="text-dark-75 text-hover-primary ">
+                                  {{ subsubsection }}
+                              </a>
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end::Iconbox-->
+                </div>
+            {% endfor %}
+        {% endfor %}        
+        
+        <!--end::Row-->
+      </div>
+    </div>
+
+    
+
+    
+{% endblock content %}
+
+{% block footer %}{% include "partials/_footer.html" %}{% endblock footer %}
+
+{% block scrolltop %}{% include "partials/_extras/scrolltop.html" %}{% endblock scrolltop %} 
+
+
+{% block custom_js %}
+    
+    <script src="{{ url_for('static', filename='assets/js/pages/my-script.js') }}"></script>
+
+{% endblock custom_js %}

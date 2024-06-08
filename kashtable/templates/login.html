@@ -1,0 +1,120 @@
+{% extends "layouts/saas.html" %}
+{% import "macros/breadcrumbs.html" as breadcrumbs %}
+
+{% block aside %}{% include "partials/_aside.html" %}{% endblock aside %} 
+
+{% block header %}{% include "partials/_header.html" %}{% endblock header %} 
+
+{% block breadcrumbs %} {{ breadcrumbs.fit(title="Login") }} {% endblock breadcrumbs %} 
+		  
+{% block content %}
+
+    <!--begin::Card-->
+    <div class="card card-custom card-stretch example example-compact" id="kt_page_stretched_card">
+        <div class="card-header" kt-hidden-height="74">
+            <div class="card-title">
+                <h3 class="card-label">Login</h3>
+                </div>
+            <div class="card-toolbar">
+                	<span class="font-weight-bold text-muted font-size-h4">New Here?</span>
+                	<a href="{{ url_for('users.register') }}" class="font-weight-bold text-primary font-size-h4 ml-2" id="kt_login_signup">Create Account</a>
+
+            </div>
+        </div>
+        <!--begin::Form-->
+        <form class="form" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="card-body">                            
+                <!--begin::Form group-->
+                <div class="form-group row">
+                    {{ form.email.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control") }}
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->
+                
+                <!--begin::Form group-->
+                <div class="form-group row">
+                
+                    {{ form.password.label(class="col-form-label text-right col-lg-3 col-sm-12") }}
+                    <!--end::Form-->
+                    <div class="col-lg-4 col-md-9 col-sm-12 validate">
+                        {% if form.password.errors %}
+                        
+                            <div class="input-group">
+                                <div class="input-group-prepend"></div>
+                                {{ form.password(class="form-control is-invalid") }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <label class="checkbox checkbox-inline checkbox-primary">
+                                            {{ form.remember(type="checkbox", checked="") }} 
+                                            <span></span>
+                                       </label>
+                                    </span>
+                                </div>
+                            </div>  
+                                                                        
+                            <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="input-group">
+                                <div class="input-group-prepend"></div>
+                                {{ form.password(class="form-control") }}
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <label class="checkbox checkbox-inline checkbox-primary">
+                                            {{ form.remember(type="checkbox", checked="") }} 
+                                            <span></span>
+                                       </label>
+                                    </span>
+                                </div>
+                            </div>                                          
+                        {% endif %}        
+                    </div>
+                    <!--end::Form-->
+                </div>
+                <!--end::Form group-->                               
+            </div>
+            <!--end::Body-->
+            <div class="card-footer">
+                <div class="row">
+                    <!--end::Action-->
+                    <div class="col-lg-9 ml-lg-auto">
+                        {{ form.submit(class="btn btn-primary mr-2") }}
+                         <small class="text-muted ml-2">
+                            <a href="{{ url_for('users.reset_request') }}" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
+                                Forgot Password?
+                            </a>
+                        </small>
+                    </div>
+                    <!--end::Action-->
+                </div>
+            </div>
+        </form>
+        <!--end::Form-->
+    </div>
+
+{% endblock content %} 
+
+{% block footer %}{% include "partials/_footer.html" %}{% endblock footer %}
+
+{% block custom_js %}
+
+    <script src="{{ url_for('static', filename='assets/js/pages/my-script.js') }}"></script>
+    
+{% endblock custom_js %} 

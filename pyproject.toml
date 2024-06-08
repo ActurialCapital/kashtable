@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "kashtable"
+version = "0.1.0"
+description = "Python-based financial SaaS platform built with flask, pandas, SQLite, highcharts and more."
+authors = ["ActurialCapital"]
+license = "BSD 3-Clause License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "^3.0.3"
+flask-sqlalchemy = "^3.1.1"
+flask-bcrypt = "^1.0.1"
+flask-login = "^0.6.3"
+flask-mail = "^0.10.0"
+flask-excel = "^0.0.7"
+flask-admin = "^1.6.1"
+flask-basicauth = "^0.2.0"
+flask-wtf = "^1.2.1"
+sqlalchemy-utils = "^0.41.2"
+pandas = "1.5.3"
+pillow = "^10.3.0"
+python-dotenv = "^1.0.1"
+email-validator = "^2.1.1"
+click = "^8.1.7"
+pyexcel-xls = "^0.7.0"
+pyexcel-xlsx = "^0.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

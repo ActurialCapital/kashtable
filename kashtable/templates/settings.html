@@ -1,0 +1,81 @@
+{% set logo = url_for("static", filename="assets/media/client-logos/logo_kashtable.png") %} 
+{% set header_menu = {
+        "Home": url_for("main.home"),       
+    }
+%} 
+{% set topbar_is_authenticated_menu = {
+        "Upload": url_for("posts.upload"), 
+        "Profile": url_for("users.profile"),   
+        "Logout": url_for("users.logout"),
+        
+    }
+%}
+
+{% set topbar_not_authenticated_menu = {
+        "Login": url_for("users.login"),
+        "Sign Up": url_for("users.register"),
+    }
+%} 
+<!-- begin::NavBar Header -->
+
+<!-- begin::AsideMenu -->
+{% set aside_is_authenticated_menu = {          
+        "KASHTABLE": {
+            "Compte de Resultat": {
+                "Cumulé": url_for("posts.table", table_name="Compte de Resultat Analytique Cumulé"),
+                "Courant": url_for("posts.table", table_name="Compte de Resultat Analytique Courant"),
+            },
+            "Flux de Trésorerie": {
+                "Historique Direct": url_for("posts.table", table_name="Flux de Trésorerie Historique Direct"),
+                "Historique Indirect": url_for("posts.table", table_name="Flux de Trésorerie Historique Indirect"),
+            },
+            "Bilan": {
+                "Bilan": url_for("posts.table", table_name="Bilan"),                            
+            },
+            "Budget": {
+                "Budget": url_for("posts.table", table_name="Budget"),            
+            },
+            "Prévision de Trésorerie": {
+                "Prévision de trésorerie": url_for("posts.table", table_name="Prévision de Trésorerie"),  
+            },
+            "Graphiques": {
+                "Dashboard": url_for("posts.graph"),  
+            }      
+                    
+        },
+        
+    }
+%} 
+
+{% set aside_not_authenticated_menu = {          
+        "Access": {
+            "Account": {
+                "Login": url_for("users.login"),              
+                "Sign Up": url_for("users.register"),  
+            },
+        },
+    }
+%} 
+
+{% set aside_icons = {
+        "Account": "flaticon2-paperplane",
+        "Compte de Resultat": "flaticon2-layers",
+        "Flux de Trésorerie": "flaticon2-list-1",
+        "Bilan": "flaticon2-delivery-package",
+        "Budget": "flaticon2-pie-chart-1",
+        "Prévision de Trésorerie": "flaticon2-box",
+        "Graphiques": "flaticon2-rocket"
+      
+
+    }
+%} 
+<!-- end::AsideMenu -->
+{% set footer_menu = {
+        "About": "#",
+        "Solutions": "#",     
+        "Privacy": "#"  ,           
+    }
+%} 
+{% set copyright = 2020 %} 
+{% set company_name = "KashTable"  %} 
+<!-- begin::Footer -->

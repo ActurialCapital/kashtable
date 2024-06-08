@@ -1,0 +1,25 @@
+<div class="card card-custom">
+ <div class="card-header">
+  <div class="card-toolbar">
+   <ul class="nav nav-light-danger nav-bold nav-pills">   
+    {% for label, tb in items.items() %}
+        <li class="nav-item">
+         <a class="nav-link" data-toggle="tab" href="#{{ tb[0] }}">
+             <span class="nav-text">{{ label }}</span>
+         </a>
+        </li>
+    {% endfor %}
+   </ul>
+  </div>
+ </div>
+ <div class="card-body">
+  <div class="tab-content container-fluid">
+   <br> 
+   {% for label, tb in items.items() %}
+       <div class="tab-pane fade" id="{{ tb[0] }}" role="tabpanel" aria-labelledby="{{ tb[0] }}">
+        {{ tb[1]|safe }}
+       </div>
+    {% endfor %} 
+  </div>
+ </div>
+</div>

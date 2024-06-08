@@ -1,0 +1,240 @@
+{% extends "layouts/saas.html" %}
+
+{% import "macros/breadcrumbs.html" as breadcrumbs %}
+
+{% block custom_css %}
+
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="{{ url_for('static', filename='assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
+    <link href="{{ url_for('static', filename='assets/css/pages/my-script.css') }}" rel="stylesheet" type="text/css" />
+       	
+{% endblock custom_css %}
+
+{% block aside %}{% include "partials/_aside.html" %}{% endblock aside %} 
+
+{% block header %}{% include "partials/_header.html" %}{% endblock header %} 
+
+{% block breadcrumbs %} 
+    
+    <div class="subheader py-6 py-lg-8 subheader-transparent" id="kt_subheader" kt-hidden-height="95" style="">
+      <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Page Heading-->
+        <div class="d-flex align-items-baseline flex-wrap mr-5">
+            <!--begin::Page Title-->
+            <h5 class="text-dark font-weight-bold my-1 mr-5">{{ title }}</h5>
+
+            <!--end::Page Title-->
+            <!--begin::Breadcrumb-->
+            <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('main.home') }}" class="text-muted">Home</a>
+                </li>                       
+                                  
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}                        
+                            <li class="breadcrumb-item">
+                                <span class="label label-light-{{ category }} label-inline mr-2">
+                                    {{ message }}
+                                </span>
+                            </li>     
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}                                                
+            </ul>
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page Heading-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center flex-wrap">
+            <!--begin::Form-->    
+            <form class="ml-5" method="POST" action="" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <div class="input-group date" >
+                    {{ form.opts(class="form-control", autocomplete="off") }}
+                    <div class="input-group-append">
+                       <span class="input-group-text">
+                            <i class="la la-calendar"></i>
+                       </span>
+                    </div>
+                    {{ form.submit(class="btn btn-danger btn-hover-text-white btn-fixed-height font-weight-bolder font-size-sm px-5 ml-2") }}
+               </div>  
+            </form>
+            <!--end::Form-->   
+        </div>
+        <!--end::Toolbar-->
+      </div>
+    </div>
+
+{% endblock breadcrumbs %} 
+
+{% block content %}
+    
+    <div class="card card-custom card-stretch example example-compact" id="kt_page_stretched_card">
+    
+        <div class="card-header">
+            <div class="card-title">
+                <span class="card-icon">
+                    <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\keen\theme\demo1\dist/../src/media/svg/icons\General\Thunder-move.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path d="M16.3740377,19.9389434 L22.2226499,11.1660251 C22.4524142,10.8213786 22.3592838,10.3557266 22.0146373,10.1259623 C21.8914367,10.0438285 21.7466809,10 21.5986122,10 L17,10 L17,4.47708173 C17,4.06286817 16.6642136,3.72708173 16.25,3.72708173 C15.9992351,3.72708173 15.7650616,3.85240758 15.6259623,4.06105658 L9.7773501,12.8339749 C9.54758575,13.1786214 9.64071616,13.6442734 9.98536267,13.8740377 C10.1085633,13.9561715 10.2533191,14 10.4013878,14 L15,14 L15,19.5229183 C15,19.9371318 15.3357864,20.2729183 15.75,20.2729183 C16.0007649,20.2729183 16.2349384,20.1475924 16.3740377,19.9389434 Z" fill="#000000"/>
+                            <path d="M4.5,5 L9.5,5 C10.3284271,5 11,5.67157288 11,6.5 C11,7.32842712 10.3284271,8 9.5,8 L4.5,8 C3.67157288,8 3,7.32842712 3,6.5 C3,5.67157288 3.67157288,5 4.5,5 Z M4.5,17 L9.5,17 C10.3284271,17 11,17.6715729 11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L4.5,20 C3.67157288,20 3,19.3284271 3,18.5 C3,17.6715729 3.67157288,17 4.5,17 Z M2.5,11 L6.5,11 C7.32842712,11 8,11.6715729 8,12.5 C8,13.3284271 7.32842712,14 6.5,14 L2.5,14 C1.67157288,14 1,13.3284271 1,12.5 C1,11.6715729 1.67157288,11 2.5,11 Z" fill="#000000" opacity="0.3"/>
+                        </g>
+                    </svg><!--end::Svg Icon--></span>
+                </span>
+                <h3 class="card-label">KashTable</h3>
+            </div> 
+
+            <div class="card-toolbar">
+ 
+              <div class="dropdown dropdown-inline">
+                <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="svg-icon svg-icon-md">
+                  <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <rect x="0" y="0" width="24" height="24"></rect>
+                      <path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3"></path>
+                      <path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000"></path>
+                    </g>
+                  </svg>
+                  <!--end::Svg Icon-->
+                </span>Export</button>
+                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" style="">
+                  <ul class="navi flex-column navi-hover py-2">
+                    <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">Export Tools</li>
+                    <li class="navi-item">
+                      <a href="#" class="navi-link" id="export_print">
+                        <span class="navi-icon">
+                          <i class="la la-print"></i>
+                        </span>
+                        <span class="navi-text">Print</span>
+                      </a>
+                    </li>
+                    <li class="navi-item">
+                      <a href="#" class="navi-link" id="export_copy">
+                        <span class="navi-icon">
+                          <i class="la la-copy"></i>
+                        </span>
+                        <span class="navi-text">Copy</span>
+                      </a>
+                    </li>
+                    <li class="navi-item">
+                      <a href="#" class="navi-link" id="export_excel">
+                        <span class="navi-icon">
+                          <i class="la la-file-excel-o"></i>
+                        </span>
+                        <span class="navi-text">Excel</span>
+                      </a>
+                    </li>
+                    <li class="navi-item">
+                      <a href="#" class="navi-link" id="export_csv">
+                        <span class="navi-icon">
+                          <i class="la la-file-text-o"></i>
+                        </span>
+                        <span class="navi-text">CSV</span>
+                      </a>
+                    </li>
+                    <li class="navi-item">
+                      <a href="#" class="navi-link" id="export_pdf">
+                        <span class="navi-icon">
+                          <i class="la la-file-pdf-o"></i>
+                        </span>
+                        <span class="navi-text">PDF</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+                 											                         
+        </div>              											                         
+        
+        <div id="websiteOverlay" style="pointer-events:none;"></div>
+        
+        <div class="card-body">
+            {{ tb|safe }}
+        </div>
+            
+        <div class="card-footer">
+            Source: KashTable.
+        </div>
+        
+    </div>
+
+                   
+{% endblock content %}
+
+{% block footer %}{% include "partials/_footer.html" %}{% endblock footer %}
+
+{% block scrolltop %}{% include "partials/_extras/scrolltop.html" %}{% endblock scrolltop %} 
+
+{% block custom_js %}
+
+    <script src="{{ url_for('static', filename='assets/js/pages/features/forms/widgets/bootstrap-datepicker.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/pages/my-script.js') }}"></script>
+
+    <script>
+        jQuery(document).ready(function() {
+            var T_table1 = $("#T_table1").DataTable({
+            	  buttons: [
+            	    'print',
+            	    'copyHtml5',
+            	    'excelHtml5',
+            	    'csvHtml5',
+            	    'pdfHtml5',
+            	  ],             
+              // responsive: true,  
+              autoWidth: true,
+              ordering: false,
+              bDestroy: true,
+              lengthChange: false,
+              sDom: "lrtip",
+              stateSave: true,
+              select: true,
+              deferRender: true,
+              scrollY: "500px",
+              scrollX: true,
+              scrollCollapse: true,
+              scroller: true,
+              searchDelay: 500,
+              processing: true,
+              columnDefs: [{targets: 0, responsivePriority: -1}],
+              
+            });
+            
+            	$('#export_print').on('click', function(e) {
+            	  e.preventDefault();
+            	  T_table1.button(0).trigger();
+            	});
+            
+            	$('#export_copy').on('click', function(e) {
+            	  e.preventDefault();
+            	  T_table1.button(1).trigger();
+            	});
+            
+            	$('#export_excel').on('click', function(e) {
+            	  e.preventDefault();
+            	  T_table1.button(2).trigger();
+            	});
+            
+            	$('#export_csv').on('click', function(e) {
+            	  e.preventDefault();
+            	  T_table1.button(3).trigger();
+            	});
+            
+            	$('#export_pdf').on('click', function(e) {
+            	  e.preventDefault();
+            	  T_table1.button(4).trigger();
+            	});            
+        });
+    </script>
+        
+{% endblock custom_js %}
+    
+    

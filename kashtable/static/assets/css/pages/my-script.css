@@ -1,0 +1,40 @@
+/* begin::ChartResponsiveness */
+.tab-content>.tab-pane,
+.pill-content>.pill-pane {display: block; height: 0; overflow-x: hidden; overflow-y: hidden;}
+.tab-content>.active,
+.pill-content>.active {height: auto;}
+/* end::ChartResponsiveness */
+
+@-webkit-keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+#websiteOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:white;
+    opacity: 0;
+    -webkit-animation: fadeOut 6s;
+    animation: fadeOut 5s;
+}

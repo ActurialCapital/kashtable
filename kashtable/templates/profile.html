@@ -1,0 +1,117 @@
+{% import "macros/breadcrumbs.html" as breadcrumbs %}
+
+{% extends "layouts/saas.html" %}
+
+{% block aside %}{% include "partials/_aside.html" %}{% endblock aside %} 
+
+{% block header %}{% include "partials/_header.html" %}{% endblock header %} 
+
+{% block breadcrumbs %} {{ breadcrumbs.fit(title="Profile") }} {% endblock breadcrumbs %} 
+
+{% block content %}                
+    <!--begin::CustomCart-->
+    <!--begin::Card-->
+    <div class="card card-custom">
+        <!--begin::Card body-->
+        <div class="card-body">
+            <form class="form" id="kt_form" method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="tab-content">
+                    <!--begin::Tab-->
+                    <div class="tab-pane show px-7 active" id="kt_user_edit_tab_1" role="tabpanel">
+                        <!--begin::Row-->
+                        <div class="row">
+                            <div class="col-xl-2">
+                            </div>
+                            <div class="col-xl-7 my-2">
+                                <!--begin::Group-->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-3 text-lg-right text-left">
+                                        {{ form.picture.label() }}
+                                    </label>
+                                    <div class="col-9">
+                                    
+                                        <div class="image-input image-input-outline image-input-circle" id="kt_image_3">
+                                            <div class="image-input-wrapper" style="background-image: url({{ image_file }})"></div>
+                                                <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change">
+                                                    <i class="fa fa-pen icon-sm text-muted"></i>
+                                                    {{ form.picture(class="form-control-file") }}
+                                                    {% if form.picture.errors %}
+                                                        {% for error in form.picture.errors %}
+                                                            <span class="text-danger">{{ error }}</span></br>
+                                                        {% endfor %}
+                                                    {% endif %}      
+                                                    <input type="hidden" name="profile_avatar_remove"/>
+                                                </label>
+                                        
+                                            <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel">
+                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                            </span>
+                                        </div>   
+                                                                       
+                                    </div>
+                                </div>
+                                <!--end::Group-->
+                                
+                                {% for item in [form.first_name, 
+                                                form.last_name, 
+                                                form.email,
+                                                form.phone_number,
+                                                form.company_name,
+                                                form.street,
+                                                form.postcode,
+                                                form.city,
+                                                form.country,
+                                                form.siren,
+                                                ] %}
+                                    <!--begin::Group-->
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-3 text-lg-right text-left">
+                                            {{ item.label(class="form-control-label") }}
+                                        </label>
+                                        <div class="col-9">                                        
+                                            {% if item.errors %}
+                                                {{ item(class="form-control form-control-lg form-control-solid is-invalid") }}
+                                                <div class="invalid-feedback">
+                                                    {% for error in item.errors %}
+                                                        <span>{{ error }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            {% else %}
+                                                {{ item(class="form-control form-control-lg form-control-solid") }}
+                                            {% endif %}                                        
+                                        </div>
+                                    </div>
+                                    <!--end::Group-->                               
+                                {% endfor %}
+
+                                <!--begin::Group-->
+                                <div class="form-group row">
+                                    <label class="col-form-label col-3 text-lg-right text-left">
+                                    </label>
+                                    <div class="col-9">                                        
+                                        {{ form.submit(class="btn btn-primary mr-2") }}                                       
+                                    </div>
+                                </div>
+                                <!--end::Group-->                                
+                            </div>
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                    <!--end::Tab-->
+                </div>
+            </form>
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->    
+    <!--end::CustomCart-->           
+{% endblock content %}
+
+{% block footer %}{% include "partials/_footer.html" %}{% endblock footer %}
+
+{% block scrolltop %}{% include "partials/_extras/scrolltop.html" %}{% endblock scrolltop %} 
+
+{% block custom_js %}
+    <script src="{{ url_for('static', filename='assets/js/pages/my-script.js') }}"></script>
+{% endblock custom_js %} 

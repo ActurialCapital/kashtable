@@ -1,0 +1,33 @@
+{% macro fit(posts, route, username) %}
+
+    <!--begin::Pagination-->
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div class="d-flex flex-wrap mr-3">
+            
+            {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            
+                {% if page_num %}
+            
+                    {% if posts.page == page_num %}
+                        
+                        <a href="{{ url_for(route, username, page=page_num) }}" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">{{ page_num }}</a>
+                                                
+                    {% else %}
+
+                        <a href="{{ url_for(route, username, page=page_num) }}" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">{{ page_num }}</a>
+                                     
+                    {% endif %}
+                    
+                {% else %}
+                    
+                    <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>
+          
+                {% endif %}
+        
+            {% endfor %}
+        
+        </div>
+    </div>
+    <!--end::Pagination-->
+    
+{% endmacro %}
