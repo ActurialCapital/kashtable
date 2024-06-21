@@ -4,7 +4,7 @@
 # Kashtable
 
 <p align="center">
-  <img src="docs/static/kashtable_dev_logo.png" width="50%" height="50%">
+  <img src="docs/static/kashtable_dev_logo.png" width="90%" height="90%">
 </p>
 
 <!-- TABLE OF CONTENTS -->
